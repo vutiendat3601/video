@@ -7,7 +7,7 @@
     <title>HLS Player</title>
 
     <!-- ## CSS -->
-    <link rel="stylesheet" href="./assets/css/video-js-8.9.0.css">
+    <link rel="stylesheet" href="./assets/css/video-js-8.9.0.min.css">
     <link rel="stylesheet" href="./assets/css/reset.css">
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
@@ -16,20 +16,62 @@
     <main>
         <section class="video">
             <div class="content">
-                <video id="video-player" class="video-js video-player" controls preload="auto" data-setup="{}">
-                    <source src="https://raw.githubusercontent.com/vutiendat3601/video/main/assets/video/ce8e9b7445e80ec22afc8c0490f3f891/ce8e9b7445e80ec22afc8c0490f3f891047.m3u8"
-                        type="application/x-mpegURL" />
-                    <p class="vjs-no-js">
-                        To view this video please enable JavaScript, and consider upgrading to a
-                        web browser that
-                        <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
-                    </p>
-                </video>
+                <video-js id="video-player" class="video-player vjs-16-9">
+                    <source id="video-source" src="" type="" />
+                </video-js>
+                <p id="video-name" class="video-name"></p>
+                <div class="video-controls">
+                    <button id="previous">Previous</button>
+                    <button id="next">Next</button>
+                </div>
             </div>
         </section>
     </main>
+    <script src="./assets/js/video-8.9.0.min.js"></script>
+    <!-- <script src="./assets/js/dash-4.7.3.all.min.js"></script> -->
+    <!-- <script src="./assets/js/videojs-dash-5.1.1.min.js"></script> -->
+    <script>
+        const player = videojs('video-player', {
+            customControlsOnMobile: true,
+            nativeControlsForTouch: false,
+            controls: true,
+            fill: false,
+            autoplay: true,
+            responsive: true,
+            fluid: true,
+            playbackRates: [0.5, 1, 1.5, 2],
+        });
+        const videoSrcs = [{
+            name: "SƠN TÙNG M-TP x BOMATELA | MUỘN RỒI MÀ SAO CÒN (REMIX) | OFFICIAL VISUALIZER"
+            , link: "./assets/video/57b08678fdb51081f122e18b5e122eb1/57b08678fdb51081f122e18b5e122eb1.mpd"
+        },
+        {
+            name: "EM CỦA NGÀY HÔM QUA - SƠN TÙNG M-TP | CHUNG KẾT VIETNAM IDOL 2023",
+            link: "./assets/video/ce8e9b7445e80ec22afc8c0490f3f891/ce8e9b7445e80ec22afc8c0490f3f891.mpd"
+        }];
+        const videoName = document.getElementById('video-name');
+        let videoIndex = 0;
+        const previousBtn = document.getElementById('previous')
+        const nextBtn = document.getElementById('next')
 
-    <script src="assets/js/video-js-8.9.0.js"></script>
+        previousBtn.onclick = (e) => {
+            videoIndex = videoIndex == 0 ? videoSrcs.length - 1 : videoIndex - 1;
+            changeVideo();
+        }
+
+        nextBtn.onclick = (e) => {
+            videoIndex = videoIndex == videoSrcs.length - 1 ? 0 : videoIndex + 1;
+            changeVideo();
+        }
+
+        function changeVideo() {
+            player.src({ type: "application/dash+xml", src: videoSrcs[videoIndex].link });
+            videoName.innerText = videoSrcs[videoIndex].name;
+        }
+
+        changeVideo();
+        player.play();
+    </script>
 </body>
 
 </html>
