@@ -43,12 +43,15 @@ button {
     line-height: 1.2;
     letter-spacing: -1px;
 }
-.video .video-controls {
+.video-controls {
     margin-top: 12px;
     display: flex;
     justify-content: center;
     column-gap: 8px;
 }
 
-
+.video-control {
+    font-weight: 700;
+    font-size: 1.8rem;
+}
 /* # Video */

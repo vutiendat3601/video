@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HLS Player</title>
-
+    <link rel="shortcut icon" href="#">
+    
     <!-- ## CSS -->
     <link rel="stylesheet" href="./assets/css/video-js-8.9.0.min.css">
     <link rel="stylesheet" href="./assets/css/reset.css">
@@ -17,12 +18,11 @@
         <section class="video">
             <div class="content">
                 <video-js id="video-player" class="video-player vjs-16-9">
-                    <source id="video-source" src="" type="" />
                 </video-js>
                 <p id="video-name" class="video-name"></p>
                 <div class="video-controls">
-                    <button id="previous">Previous</button>
-                    <button id="next">Next</button>
+                    <button id="previous" class="video-control">Previous</button>
+                    <button id="next" class="video-control">Next</button>
                 </div>
             </div>
         </section>
